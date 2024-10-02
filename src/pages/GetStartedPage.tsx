@@ -19,16 +19,16 @@ const GetStartedPage = () => {
             {config.app.title}
           </h3>
           <div
-            className="w-full pt-56 pb-14"
+            className="w-full pt-56 pb-14 h-min"
             style={{
-              backgroundImage: 'url("/src/assets/images/get_started_car.png")',
+              backgroundImage: 'url("./src/assets/images/get_started_car.png")',
               backgroundSize: "490px",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "right",
             }}
           ></div>
         </div>
-        <div className="py-7 flex flex-col gap-2 ">
+        <div className="pb-7 flex flex-col gap-2 ">
           <div>
             <h3 className="text-3xl px-4 pb-1 font-normal">
               Find the ideal car
