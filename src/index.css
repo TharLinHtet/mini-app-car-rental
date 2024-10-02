@@ -3,15 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #ea8983;
-  --secondary-color: #d1d6e4;
-  --dark-color: #07090d;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-color: #46f598;
+  --secondary-color: #286c49;
+  --dark-color: #141115;
+  --grey-color: #f5f5f8;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  padding: 12px;
+  padding: 0;
 }

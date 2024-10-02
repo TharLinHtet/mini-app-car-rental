@@ -1,5 +1,11 @@
+import Header from "@/components/Header";
+
 const HomePage = () => {
-  return <div className="text-3xl font-bold underline text-primary">Home</div>;
+  return (
+    <div className="text-dark p-4">
+      <Header />
+    </div>
+  );
 };
 
 export default HomePage;
