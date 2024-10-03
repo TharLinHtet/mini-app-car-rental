@@ -1,8 +1,33 @@
 import Button from "@/components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { config } from "@/config";
-// https://images.unsplash.com/photo-1545486332-9e0999c535b2?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+import { useEffect, useState } from "react";
+
 const GetStartedPage = () => {
+  const navigate = useNavigate();
+  const [countDown, setCountDown] = useState(5);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCountDown((prev) => {
+        if (prev <= 1) {
+          clearInterval(intervalId);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [navigate]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      navigate("/details");
+    }, 5000);
+    return () => clearTimeout(timeoutId);
+  }, []);
   return (
     <div
       className="h-dvh w-full bg-black text-white overflow-hidden"
@@ -21,7 +46,7 @@ const GetStartedPage = () => {
           <div
             className="w-full pt-56 pb-14 h-min"
             style={{
-              backgroundImage: 'url("./src/assets/images/get_started_car.png")',
+              backgroundImage: 'url("/images/get_started_car.png")',
               backgroundSize: "490px",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "right",
@@ -42,7 +67,9 @@ const GetStartedPage = () => {
           </div>
 
           <Link to="/details" className="px-4">
-            <Button>Get Started</Button>
+            <Button>
+              Get Started <span className="font-light">({countDown}s)</span>
+            </Button>
           </Link>
         </div>
       </div>
