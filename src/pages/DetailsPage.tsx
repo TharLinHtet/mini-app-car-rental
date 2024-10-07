@@ -16,7 +16,7 @@ const DetailsPage = () => {
     console.log("helo");
   };
   return (
-    <div className="p-4 w-full h-dvh bg-gradient-to-b from-white via-slate-100 to-slate-200 relative">
+    <div className="p-4 w-full bg-gradient-to-b from-white via-slate-100 to-slate-200 relative">
       <Header />
       <Card className="mb-4 border-b">
         <div className="flex flex-col justify-center items-center">
@@ -91,6 +91,13 @@ const DetailsPage = () => {
         </div>
       </div>
 
+      <div className="relative overflow-hidden rounded-xl mt-4">
+        <input
+          onFocus={handleBlur}
+          type="date"
+          className="p-3 w-full outline-1 outline-primary rounded-lg"
+        />
+      </div>
       <Button className=" mx-auto mt-4">
         <div className="flex justify-between items-center">
           <div className="bg-secondary p-1 px-3 rounded-3xl text-white">
