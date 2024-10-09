@@ -46,7 +46,7 @@ const GetStartedPage = () => {
           <div
             className="w-full pt-56 pb-14 h-min"
             style={{
-              backgroundImage: 'url("/images/get_started_car.png")',
+              backgroundImage: 'url("./images/get_started_car.png")',
               backgroundSize: "490px",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "right",
@@ -66,7 +66,7 @@ const GetStartedPage = () => {
             </p>
           </div>
 
-          <Link to="/details" className="px-4">
+          <Link to={config.route.home} className="px-4">
             <Button>
               Get Started <span className="font-light">({countDown}s)</span>
             </Button>

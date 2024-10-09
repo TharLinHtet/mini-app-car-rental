@@ -23,7 +23,7 @@ const Header = ({
           <LeftArrowIcon />
         </button>
       )}
-      <Link to="/home">
+      <Link to={config.route.home}>
         <h3 className="font-medium">{title}</h3>
       </Link>
       <div></div>

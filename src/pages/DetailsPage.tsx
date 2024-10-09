@@ -16,11 +16,11 @@ const DetailsPage = () => {
     console.log("helo");
   };
   return (
-    <div className="p-4 w-full bg-gradient-to-b from-white via-slate-100 to-slate-200 relative">
+    <div className="p-4 w-full bg-gradient-to-b h-dvh from-white via-slate-100 to-slate-200 relative">
       <Header />
       <Card className="mb-4 border-b">
         <div className="flex flex-col justify-center items-center">
-          <img src="/images/get_started_car.png" className="h-[150px]" />
+          <img src="./images/get_started_car.png" className="h-[150px]" />
           <div className="flex justify-between items-center w-full">
             <h3 className="font-medium">Mercedes-Benz A-class</h3>
             <div className="flex items-center gap-2">
@@ -95,7 +95,7 @@ const DetailsPage = () => {
         <input
           onFocus={handleBlur}
           type="date"
-          className="p-3 w-full outline-1 outline-primary rounded-lg"
+          className="p-3 w-full outline-1 bg-white outline-primary rounded-lg"
         />
       </div>
       <Button className=" mx-auto mt-4">
