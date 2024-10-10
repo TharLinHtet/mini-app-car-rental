@@ -1,30 +1,30 @@
 import Button from "@/components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "@/config";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 const GetStartedPage = () => {
   const navigate = useNavigate();
-  const [countDown, setCountDown] = useState(5);
+  // const [countDown, setCountDown] = useState(5);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCountDown((prev) => {
-        if (prev <= 1) {
-          clearInterval(intervalId);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [navigate]);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setCountDown((prev) => {
+  //       if (prev <= 1) {
+  //         clearInterval(intervalId);
+  //         return 0;
+  //       }
+  //       return prev - 1;
+  //     });
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, [navigate]);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      navigate("/details");
+      navigate(config.route.home);
     }, 5000);
     return () => clearTimeout(timeoutId);
   }, []);
@@ -67,9 +67,7 @@ const GetStartedPage = () => {
           </div>
 
           <Link to={config.route.home} className="px-4">
-            <Button>
-              Get Started <span className="font-light">({countDown}s)</span>
-            </Button>
+            <Button>Get Started</Button>
           </Link>
         </div>
       </div>
