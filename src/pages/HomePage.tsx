@@ -24,7 +24,7 @@ const HomePage = () => {
         <div className="p-4">
           <Header hideIcon />
         </div>
-        <div className="">
+        <div className="motion-preset-slide-right-sm">
           <h3 className="p-4 text-lg font-medium">Most Popular</h3>
           <Slider {...settings} initialSlide={1} swipeToSlide={true}>
             {cars.slice(0, 3).map((car) => (
@@ -61,9 +61,16 @@ const HomePage = () => {
         </div>
       </div>
       <div className="flex flex-col gap-2 p-4 flex-1 overflow-y-scroll mb-4">
-        {cars.map((car) => (
+        {cars.map((car, index) => (
           <Link to={`${config.route.details}/${car.id}`} key={car.id}>
-            <Card className="rounded-md border" key={car.id}>
+            <Card
+              className={`rounded-md border ${
+                (index + 1) % 2 == 0
+                  ? "motion-preset-slide-right-sm"
+                  : "motion-preset-slide-left-sm"
+              }`}
+              key={car.id}
+            >
               <div className="min-h-36 flex flex-col">
                 <div className="flex justify-between items-center">
                   <p className="text-sm font-thin">
