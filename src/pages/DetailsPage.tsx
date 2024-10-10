@@ -97,7 +97,7 @@ const DetailsPage = () => {
   }
 
   return (
-    <div className="p-4 w-full bg-gradient-to-b h-dvh from-white via-slate-100 to-slate-200 relative">
+    <div className="p-4 w-full bg-gradient-to-b h-dvh from-white via-slate-100 to-slate-200 relative motion-preset-fade ">
       <Header />
       <Card className="mb-4 border-b">
         <div className="flex flex-col justify-center items-center">
