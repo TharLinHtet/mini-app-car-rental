@@ -24,7 +24,7 @@ const Header = ({
         </button>
       )}
       <Link to={config.route.home}>
-        <h3 className="font-medium">{title}</h3>
+        <h3 className="font-medium text-lg">{title}</h3>
       </Link>
       <div></div>
     </div>

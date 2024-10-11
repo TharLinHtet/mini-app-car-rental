@@ -5,3 +5,8 @@ html {
 html::-webkit-scrollbar {
   display: none;
 }
+
+.react-date-picker__wrapper {
+  border: none !important;
+  outline: var(--primary-color) !important;
+}

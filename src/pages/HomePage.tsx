@@ -19,7 +19,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="text-dark h-dvh flex flex-col bg-white motion-preset-fade-lg ">
+    <div className="text-dark h-dvh flex flex-col motion-preset-fade-lg bg-white">
       <div>
         <div className="p-4">
           <Header hideIcon />
