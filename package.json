@@ -21,7 +21,8 @@
     "react-slick": "^0.30.2",
     "scss": "^0.2.4",
     "slick-carousel": "^1.8.1",
-    "tailwindcss-motion": "^0.3.0-beta"
+    "tailwindcss-motion": "^0.3.0-beta",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

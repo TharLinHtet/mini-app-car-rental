@@ -237,19 +237,19 @@ const DetailsPage = () => {
         </div>
       </Card>
 
-      <div className="flex items-center gap-2 my-3">
+      <div className="flex items-center gap-1 my-3">
         {car.pricing_options.map((option, index) => (
           <Card
             key={index}
             onClick={() => handleCardClick(index, option.amount)}
             tabIndex={index}
-            className={`!p-3 text-center ${
+            className={`!px-2 !py-3 text-center ${
               selectedCard === index
                 ? "border border-primary"
                 : "border border-transparent"
             } font-thin shadow`}
           >
-            <span className="font-semibold">{option.amount} /</span>
+            <span className="font-semibold">${option.amount} /</span>
             {option.duration}
           </Card>
         ))}
@@ -283,7 +283,7 @@ const DetailsPage = () => {
       >
         <div className="flex justify-between items-center">
           <div className="bg-secondary p-1 px-3 rounded-3xl text-white">
-            <span className="font-thin"> Total :</span> {selectedPrice}
+            <span className="font-thin"> Total :</span> ${selectedPrice}
           </div>
           Booking now
         </div>

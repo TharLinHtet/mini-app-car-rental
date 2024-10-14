@@ -1,13 +1,13 @@
 import Header from "@/components/Header";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Input from "@/components/Input";
 import Card from "@/components/Card";
 import { Link } from "react-router-dom";
 import { config } from "@/config";
 import StarIcon from "@/icons/StarIcon";
-import cars from "@/config/car-data";
+import useCars from "@/hooks/useCars";
+import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 const HomePage = () => {
   var settings = {
@@ -17,6 +17,15 @@ const HomePage = () => {
     slidesToScroll: 1,
     centerMode: true,
   };
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchedValue] = useDebounce(searchTerm, 300);
+  const { cars, searchCars, loading } = useCars();
+
+  const filteredCars = searchCars(searchedValue);
+
+  if (!cars || loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="text-dark h-dvh flex flex-col motion-preset-fade-lg bg-white">
@@ -40,7 +49,7 @@ const HomePage = () => {
                     </h4>
                     <p className="text-xs px-5 font-thin">
                       <span className="font-semibold">
-                        {car.price_per_day} /
+                        ${car.price_per_day} /
                       </span>{" "}
                       day
                     </p>
@@ -57,44 +66,60 @@ const HomePage = () => {
           </Slider>
         </div>
         <div className="p-4 overflow-hidden">
-          <Input placeholder="Search for the desired car" />
+          <Input
+            placeholder="Search for the desired car"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-2 p-4 flex-1 overflow-y-scroll mb-4">
-        {cars.map((car, index) => (
-          <Link to={`${config.route.details}/${car.id}`} key={car.id}>
-            <Card
-              className={`rounded-md border ${
-                (index + 1) % 2 == 0
-                  ? "motion-preset-slide-right-sm"
-                  : "motion-preset-slide-left-sm"
-              }`}
-              key={car.id}
-            >
-              <div className="min-h-36 flex flex-col">
-                <div className="flex justify-between items-center">
-                  <p className="text-sm font-thin">
-                    <span className="font-semibold">{car.price_per_day} /</span>
-                    day
-                  </p>
-                </div>
-                <div className="flex justify-center items-center">
-                  <img src={car.image_url} className="h-[120px] object-cover" />
-                </div>
-                <div className="flex justify-between items-end">
-                  <h4 className="mt-4 text-sm font-medium">{car.name}</h4>
-                  <div className="flex items-center gap-2">
-                    <span className="text-yellow-400">
-                      <StarIcon />
-                    </span>
-                    <h4 className="font-normal text-sm">{car.rating}</h4>
+        {filteredCars.length > 0 ? (
+          filteredCars.map((car, index) => (
+            <Link to={`${config.route.details}/${car.id}`} key={car.id}>
+              <Card
+                className={`rounded-md border ${
+                  (index + 1) % 2 == 0
+                    ? "motion-preset-slide-right-sm"
+                    : "motion-preset-slide-left-sm"
+                }`}
+                key={car.id}
+              >
+                <div className="min-h-36 flex flex-col">
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm font-thin">
+                      <span className="font-semibold">
+                        ${car.price_per_day} /
+                      </span>
+                      day
+                    </p>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <img
+                      src={car.image_url}
+                      className="h-[120px] object-cover"
+                    />
+                  </div>
+                  <div className="flex justify-between items-end">
+                    <h4 className="mt-4 text-sm font-medium">{car.name}</h4>
+                    <div className="flex items-center gap-2">
+                      <span className="text-yellow-400">
+                        <StarIcon />
+                      </span>
+                      <h4 className="font-normal text-sm">{car.rating}</h4>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          </Link>
-        ))}
+              </Card>
+            </Link>
+          ))
+        ) : (
+          <div className="text-center text-gray-500 mt-10">
+            <h3 className="text-lg font-semibold">No cars found</h3>
+            <p>Try adjusting your search or filter options.</p>
+          </div>
+        )}
       </div>
+
       <style>{`
         .slider-item {
           transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
