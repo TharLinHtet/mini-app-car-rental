@@ -2,25 +2,14 @@ import Button from "@/components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { config } from "@/config";
 import { useEffect } from "react";
+import { GetSSOString } from "@/helpers/nativeAPI";
+import { useToken } from "@/hooks/useToken";
+import useTokenStore from "@/store/token.store";
 
 const GetStartedPage = () => {
   const navigate = useNavigate();
-  // const [countDown, setCountDown] = useState(5);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setCountDown((prev) => {
-  //       if (prev <= 1) {
-  //         clearInterval(intervalId);
-  //         return 0;
-  //       }
-  //       return prev - 1;
-  //     });
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [navigate]);
+  const { fetchToken } = useToken();
+  const { setToken } = useTokenStore();
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -28,6 +17,25 @@ const GetStartedPage = () => {
     }, 5000);
     return () => clearTimeout(timeoutId);
   }, []);
+
+  useEffect(() => {
+    const fetchSSOString = async () => {
+      try {
+        const res = await GetSSOString();
+        console.log(res, "res sso string");
+
+        if (res.xm_string_callback_key) {
+          const data = await fetchToken(res.xm_string_callback_key);
+          setToken(data.Response.customer_info.openID);
+        }
+      } catch (error) {
+        console.error("Error fetching SSO String or Token:", error);
+      }
+    };
+
+    fetchSSOString();
+  }, []);
+
   return (
     <div
       className="h-dvh w-full bg-black text-white overflow-hidden"

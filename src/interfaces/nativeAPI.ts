@@ -6,3 +6,7 @@ export interface IStartPay {
     disableNewCheckout: string,
     tradeType: string
 }
+
+export interface ISSOStringResponse {
+    xm_string_callback_key: string
+}

@@ -1,4 +1,21 @@
-import { IStartPay } from "@/interfaces/nativeAPI";
+import { ISSOStringResponse, IStartPay } from "@/interfaces/nativeAPI";
+
+export const GetSSOString = (): Promise<ISSOStringResponse> => {
+    return new Promise((resolve, reject) => {
+        try {
+            window.ma.callNativeAPI(
+                "gethwssostring",
+                { merchantAppId: "kp7595593cfcbf4af38d381570001225" },
+                (res: ISSOStringResponse) => {
+                    console.log("ssostring: ", res);
+                    resolve(res);
+                }
+            );
+        } catch (error) {
+            reject(error)
+        }
+    });
+};
 
 export const StartPay = (payload: IStartPay, cb?: () => void) => {
     window.ma?.callNativeAPI('startPay', payload, (res: any) => {
@@ -9,6 +26,7 @@ export const StartPay = (payload: IStartPay, cb?: () => void) => {
         }
     })
 }
+
 
 export const ShowToast = ({ title, icon, duraion }: {
     title: string,
